@@ -1,0 +1,24 @@
+.container2{
+  
+  
+ 
+    width: 60rem;
+    margin: auto;
+
+}
+.heading1{
+    
+    display: flex;
+   
+}
+.Label{
+   
+    display: flex;
+}
+.Form{
+    
+    
+}
+::-webkit-scrollbar{
+    display: none;
+}
