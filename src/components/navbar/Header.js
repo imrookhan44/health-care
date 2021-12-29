@@ -30,7 +30,7 @@ function Header() {
                 }}
                 href=""
               >
-                 Registration
+                Registration
               </Nav.Link>
               <Nav.Link
                 className="offset-2"
