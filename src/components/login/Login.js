@@ -3,7 +3,7 @@ import "./login.css";
 import firebase from "../Firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Field, useFormik } from "formik";
+import {  useFormik } from "formik";
 import * as yup from "yup";
 toast.configure();
 const validationSchema = yup.object().shape({
@@ -44,10 +44,12 @@ function Login() {
     },
     validationSchema: validationSchema,
   });
-  const renderErrorMessage = (Field) => {
+  const renderErrorMessage = (field) => {
     return (
-      formik.touched[Field] && (
-        <div style={{color:"red " }} class="text-error">{formik.errors[Field]}</div>
+      formik.touched[field] && (
+        <div style={{ color: "red " }} class="text-error">
+          {formik.errors[field]}
+        </div>
       )
     );
   };
