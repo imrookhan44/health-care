@@ -9,10 +9,8 @@ import Register from "../components/register/Register";
 export default function Routes() {
   return (
     <Switch>
-
-
-    <Route path="/" exact  component={Home} />
-    <Route path="/calculate" component={Calculate} />
+      <Route path="/" exact component={Home} />
+      <Route path="/calculate" component={Calculate} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
     </Switch>

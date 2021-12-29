@@ -1,24 +1,27 @@
-.container2{
-  
-  
- 
-    width: 60rem;
-    margin: auto;
-
+.container2 {
+  width: 60rem;
+  /* border: solid black; */
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
-.heading1{
-    
-    display: flex;
-   
+.heading1 {
+  display: flex;
 }
-.Label{
-   
-    display: flex;
+.Label {
+  display: flex;
 }
-.Form{
-    
-    
+.Form {
 }
-::-webkit-scrollbar{
-    display: none;
+::-webkit-scrollbar {
+  display: none;
+}
+@media only screen and (max-width: 400px) {
+  .container2 {
+    /* margin-right: 20px ; */
+    width: 17rem;
+    /* float: left; */
+    padding: 0px;
+    margin: 0px 0px 0px 10px;
+  }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Col, Row, Button } from "react-bootstrap";
-import './register.css'
+import "./register.css";
 
 function Register() {
   return (
@@ -8,19 +8,15 @@ function Register() {
       <div>
         <div className="container2">
           <Form className="Form">
-          <div className="row">
-          <div className="col-6">
-          <h1 className="heading1">Client Registration Form</h1>
-          </div>
-          <div className="col-6 mt-2">
-          <Button variant="primary">Go To List!</Button>
-          </div>
-        
-        
-          </div>
-          
-          
-       
+            <div className="row">
+              <div className="col-8">
+                <h1 className="heading1">Client Registration Form</h1>
+              </div>
+              <div className="col-4 mt-2">
+                <Button variant="primary">Go To List!</Button>
+              </div>
+            </div>
+
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label className="Label">
@@ -111,7 +107,7 @@ function Register() {
                 <Form.Control type="text" placeholder="City" />
               </Form.Group>
             </Row>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" id="button1">
               Submit
             </Button>
           </Form>
