@@ -2,6 +2,9 @@
   display: flex;
   justify-content: center;
 }
+.table2{
+  border: solid 2px black;
+}
 
 @media screen and (max-width: 400px) {
   #form-control {
