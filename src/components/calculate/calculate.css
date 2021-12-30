@@ -1,21 +1,28 @@
-.row {
+.Table23 {
+  width: 60rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
-@media screen and (max-width: 400px) {
-  #form-control {
-    border: solid black;
-    width: 5rem;
-  }
-  #Table {
-    border: black solid;
-    width: auto;
+div.container-fluid.Head {
+  width: 70rem;
 
-  }
-  #buttons {
-    display: flex;
-    flex-direction: column;
-    width: 13rem;
-  }
+  display: flex;
+
+  justify-content: center;
+}
+.table34 {
+  border: grey solid;
+}
+.input {
+  width: 8rem;
+}
+.one {
+  width: 20rem;
+}
+#btn1 {
+  background-color: #0d6efd;
+  color: rgb(221, 225, 228);
+  font-weight: 500;
+  font-size: 15px;
 }
