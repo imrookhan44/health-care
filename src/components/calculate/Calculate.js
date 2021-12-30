@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CreateIcon from "@material-ui/icons/Create";
 import {
   Box,
   Button,
@@ -15,31 +14,31 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import DoneIcon from "@material-ui/icons/Done";
 import ClearIcon from "@material-ui/icons/Clear";
 import { makeStyles } from "@material-ui/core/styles";
-import'./calculate.css'
 import Alert from "@material-ui/lab/Alert";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import CreateIcon from "@material-ui/icons/Create";
+import "./calculate.css";
+import { GrDownload } from "react-icons/gr";
 
-// Creating styles
 const useStyles = makeStyles({
   root: {
     "& > *": {
-      borderBottom: "unset",
+      // borderBottom: "unset",
     },
   },
   table: {
-    minWidth: 650,
+    // minWidth: 650,
   },
   snackbar: {
-    bottom: "104px",
+    // bottom: "104px",
   },
 });
 
 function Calculate() {
-  // Creating style object
   const classes = useStyles();
 
   // Defining a state named rows
@@ -79,22 +78,18 @@ function Calculate() {
         Action: "",
         FromAddress: "",
         ToAddress: "",
-        TripDateTime:"",
-        Mileage:"",
-        TimeTraveled:"",
+        TripDateTime: "",
+        Mileage: "",
+        TimeTraveled: "",
       },
     ]);
     setEdit(true);
   };
-  
-  // Function to handle edit
+
   const handleEdit = (i) => {
-    // If edit mode is true setEdit will
-    // set it to false and vice versa
     setEdit(!isEdit);
   };
 
-  // Function to handle save
   const handleSave = () => {
     setEdit(!isEdit);
     setRows(rows);
@@ -103,9 +98,6 @@ function Calculate() {
     setOpen(true);
   };
 
-  // The handleInputChange handler can be set up to handle
-  // many different inputs in the form, listen for changes
-  // to input elements and record their values in state
   const handleInputChange = (e, index) => {
     setDisable(false);
     const { name, value } = e.target;
@@ -113,14 +105,10 @@ function Calculate() {
     list[index][name] = value;
     setRows(list);
   };
-  
-  // Showing delete confirmation to users
   const handleConfirm = () => {
     setShowConfirm(true);
   };
 
-  // Handle the case of delete confirmation where
-  // user click yes delete a specific row of id:i
   const handleRemoveClick = (i) => {
     const list = [...rows];
     list.splice(i, 1);
@@ -128,208 +116,215 @@ function Calculate() {
     setShowConfirm(false);
   };
 
-  // Handle the case of delete confirmation
-  // where user click no
   const handleNo = () => {
     setShowConfirm(false);
   };
-
   return (
-    <TableBody>
-      <Snackbar
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        className={classes.snackbar}
-      >
-        <Alert onClose={handleClose} severity="success">
-          Record saved successfully!
-        </Alert>
-      </Snackbar>
-      <Box margin={1}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            {isEdit ? (
-              <div>
-                <Button onClick={handleAdd}>
-                  <AddBoxIcon onClick={handleAdd} />
-                  ADD
-                </Button>
-                {rows.length !== 0 && (
-                  <div>
-                    {disable ? (
-                      <Button disabled align="right" onClick={handleSave}>
-                        <DoneIcon />
-                        SAVE
-                      </Button>
-                    ) : (
-                      <Button align="right" onClick={handleSave}>
-                        <DoneIcon />
-                        SAVE
-                      </Button>
-                    )}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div>
-                <Button onClick={handleAdd}>
-                  <AddBoxIcon onClick={handleAdd} />
-                  ADD
-                </Button>
-                <Button align="right" onClick={handleEdit}>
-                  <CreateIcon />
-                  EDIT
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
-        <TableRow align="center"></TableRow>
-
-        <Table
-          className={classes.table}
-          size="small"
-          aria-label="a dense table"
+    <div className="container table34 mt-4">
+      <TableBody>
+        <Snackbar
+          open={open}
+          autoHideDuration={2000}
+          onClose={handleClose}
+          className={classes.snackbar}
         >
-          <TableHead>
-            <TableRow className=" Container-fluid offset-4 table2">
-              <TableCell>Action</TableCell>
-              <TableCell>From Address</TableCell>
-              <TableCell>To Address</TableCell>
-              <TableCell> Trip DateTime</TableCell>
-              <TableCell>Mileage</TableCell>
-              <TableCell>Time Traveled</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row, i) => {
-              return (
+          <Alert onClose={handleClose} severity="success">
+            Record saved successfully!
+          </Alert>
+        </Snackbar>
+        <Box>
+          <div>
+            <div>
+              {isEdit ? (
                 <div>
-                  <TableRow>
-                    {isEdit ? (
-                      <div>
-                        <TableCell padding="none">
-                          <input
-                            value={row.FromAddress}
-                            name="FromAddress"
-                            placeholder="From Address"
-                            onChange={(e) => handleInputChange(e, i)}
-                          />
-                        </TableCell>
-                        <TableCell padding="none">
-                          <input
-                            value={row.ToAdress}
-                            name="ToAdress"
-                            placeholder="To Address"
-                            onChange={(e) => handleInputChange(e, i)}
-                          />
-                        </TableCell>
-                        <TableCell padding="none">
-                          <input
-                            value={row.TripDateTime}
-                            type="date"
-                            name="TripDateTime"
-                            placeholder="Trip DateTime"
-                            onChange={(e) => handleInputChange(e, i)}
-                          />
-                        </TableCell>
-                        <TableCell padding="none">
-                          <input
-                            value={row.Mileage}
-                            name="Mileage"
-                            placeholder="Mileage"
-                            onChange={(e) => handleInputChange(e, i)}
-                          />
-                        </TableCell>
-                        <TableCell padding="none">
-                          <input
-                            value={row.TimeTraveled}
-                            name="TimeTraveled"
-                            placeholder="Time Traveled"
-                            onChange={(e) => handleInputChange(e, i)}
-                          />
-                        </TableCell>
-                      </div>
-                    ) : (
-                      <div>
-                        <TableCell component="th" scope="row">
-                          {row.Action}
-                        </TableCell>
-                        <TableCell component="th" scope="row">
-                          {row.FromAddress}
-                        </TableCell>
-                        <TableCell component="th" scope="row" align="center">
-                          {row.ToAdress}
-                        </TableCell>
-                        <TableCell component="th" scope="row" align="center">
-                          {row.TripDateTime}
-                        </TableCell>
-                        <TableCell component="th" scope="row" align="center">
-                          {row.Mileage}
-                        </TableCell>
-                        <TableCell component="th" scope="row" align="center">
-                          {row.TimeTraveled}
-                        </TableCell>
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          align="center"
-                        ></TableCell>
-                      </div>
-                    )}
-                    {isEdit ? (
-                      <Button className="mr10" onClick={handleConfirm}>
-                        <ClearIcon />
-                      </Button>
-                    ) : (
-                      <Button className="mr10" onClick={handleConfirm}>
-                        <DeleteOutlineIcon />
-                      </Button>
-                    )}
-                    {showConfirm && (
-                      <div>
-                        <Dialog
-                          open={showConfirm}
-                          onClose={handleNo}
-                          aria-labelledby="alert-dialog-title"
-                          aria-describedby="alert-dialog-description"
-                        >
-                          <DialogTitle id="alert-dialog-title">
-                            {"Confirm Delete"}
-                          </DialogTitle>
-                          <DialogContent>
-                            <DialogContentText id="alert-dialog-description">
-                              Are you sure to delete
-                            </DialogContentText>
-                          </DialogContent>
-                          <DialogActions>
-                            <Button
-                              onClick={() => handleRemoveClick(i)}
-                              color="primary"
-                              autoFocus
-                            >
-                              Yes
-                            </Button>
-                            <Button
-                              onClick={handleNo}
-                              color="primary"
-                              autoFocus
-                            >
-                              No
-                            </Button>
-                          </DialogActions>
-                        </Dialog>
-                      </div>
-                    )}
-                  </TableRow>
+                  <Button onClick={handleAdd}>
+                    <AddBoxIcon onClick={handleAdd} />
+                    ADD
+                  </Button>
+                  {rows.length !== 0 && (
+                    <div>
+                      {disable ? (
+                        <Button disabled align="right" onClick={handleSave}>
+                          <DoneIcon />
+                          SAVE
+                        </Button>
+                      ) : (
+                        <Button align="right" onClick={handleSave}>
+                          <DoneIcon />
+                          SAVE
+                        </Button>
+                      )}
+                    </div>
+                  )}
                 </div>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </Box>
-    </TableBody>
+              ) : (
+                <div>
+                  <Button onClick={handleAdd}>
+                    <AddBoxIcon onClick={handleAdd} />
+                    ADD
+                  </Button>
+                  <Button align="right" onClick={handleEdit}>
+                    <CreateIcon />
+                    EDIT
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <Table className="Table">
+            <div className="container  Head  ">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="one">
+                    <b>Action</b>
+                  </TableCell>
+
+                  <TableCell className="one">
+                    <b>From Address</b>
+                  </TableCell>
+
+                  <TableCell className="one">
+                    <b>To Address</b>
+                  </TableCell>
+
+                  <TableCell className="one">
+                    <b>Trip DateTime</b>
+                  </TableCell>
+
+                  <TableCell className="one">
+                    <b>Mileage</b>
+                  </TableCell>
+
+                  <TableCell className="one">
+                    <b>Time Traveled</b>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+            </div>
+            <TableBody>
+              {rows.map((row, i) => {
+                return (
+                  <div>
+                    <TableRow>
+                      {isEdit ? (
+                        <div className="Table23 offset-1">
+                          <TableCell>
+                            <input
+                              className="input"
+                              placeholder="choose from Address"
+                              value={row.FromAddress}
+                              name="FromAddress"
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <input
+                              className="input"
+                              placeholder="choose To Address"
+                              value={row.ToAddress}
+                              name="ToAddress"
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <input
+                              className="input"
+                              type="date"
+                              value={row.TripDateTime}
+                              name="TripDateTime"
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <td>Result Awaiting</td>
+                          </TableCell>
+                          <TableCell>
+                            <td>0 mins</td>
+                          </TableCell>
+                        </div>
+                      ) : (
+                        <div>
+                          {/* <TableCell component="th"></TableCell> */}
+                          <TableCell component="th">
+                            {row.FromAddress}
+                          </TableCell>
+                          <TableCell component="th">{row.ToAddress}</TableCell>
+                          <TableCell component="th">
+                            {row.TripDateTime}
+                          </TableCell>
+                          <TableCell component="th">{row.Mileage}</TableCell>
+                          <TableCell component="th">
+                            {row.TimeTraveled}
+                          </TableCell>
+                          <TableCell component="th" scope="row"></TableCell>
+                        </div>
+                      )}
+                      {isEdit ? (
+                        <Button className="" onClick={handleConfirm}>
+                          <ClearIcon  />
+                        </Button>
+                      ) : (
+                        <Button className="" onClick={handleConfirm}>
+                          <DeleteOutlineIcon />
+                        </Button>
+                      )}
+                      {showConfirm && (
+                        <div>
+                          <Dialog
+                            open={showConfirm}
+                            onClose={handleNo}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                            <DialogTitle id="alert-dialog-title">
+                              {"Confirm Delete"}
+                            </DialogTitle>
+                            <DialogContent>
+                              <DialogContentText id="alert-dialog-description">
+                                Are you sure to delete
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button
+                                onClick={() => handleRemoveClick(i)}
+                                color="primary"
+                                autoFocus
+                              >
+                                Yes
+                              </Button>
+                              <Button
+                                onClick={handleNo}
+                                color="primary"
+                                autoFocus
+                              >
+                                No
+                              </Button>
+                            </DialogActions>
+                          </Dialog>
+                        </div>
+                      )}
+                    </TableRow>
+                  </div>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Box>
+      </TableBody>
+      <div className="row offset-3 mb-2 ">
+        <div className="col-lg-12 col-md-12  mt-3" id="buttons">
+          <Button variant="contained" id="btn1">
+            Calculate Distance
+          </Button>{" "}
+          <Button variant="contained" id="btn1">
+            <GrDownload />
+            &nbsp; Download Report
+          </Button>
+        </div>
+        </div>
+        </div>
+      
   );
 }
 
