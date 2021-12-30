@@ -3,6 +3,9 @@
   display: flex;
   justify-content: space-around;
 }
+.table2{
+  border: solid 2px black;
+}
 
 div.container-fluid.Head {
   width: 70rem;

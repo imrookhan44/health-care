@@ -105,7 +105,6 @@ function Calculate() {
     list[index][name] = value;
     setRows(list);
   };
-
   const handleConfirm = () => {
     setShowConfirm(true);
   };
@@ -323,8 +322,9 @@ function Calculate() {
             &nbsp; Download Report
           </Button>
         </div>
-      </div>
-    </div>
+        </div>
+        </div>
+      
   );
 }
 
