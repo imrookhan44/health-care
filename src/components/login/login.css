@@ -37,7 +37,7 @@ label {
   float: left;
 }
 #Login {
-  width: 290px;
+  width: 20rem;
 }
 #Card {
   background-color: #f7f7f7;
@@ -54,4 +54,10 @@ label {
   text-align: center;
   width: 100%;
   height: 100vh;
+}
+.text-error{
+  border: solid black;
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
 }

@@ -50,7 +50,7 @@ function Login() {
   const renderErrorMessage = (field) => {
     return (
       formik.touched[field] && (
-        <div style={{ color: "red " }} class="text-error" >
+        <div className="text-error" >
           {formik.errors[field]}
         </div>
       )
@@ -60,18 +60,18 @@ function Login() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 6000);
+    }, 4000);
   }, []);
 
   return (
-    <div className="app">
+    <div className="app ">
       {loading ? (
         <div className="Loader">
           <FadeLoader color={"black"} loading={loading} size={70} id="Loader" />{" "}
         </div>
       ) : (
         <div className="">
-          <div className="card card-container mt-5" id="Card">
+          <div className="card card-container mt-5 pt-5" id="Card">
             <img
               src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
               alt="profile-img"
@@ -105,6 +105,7 @@ function Login() {
 
               <div className="form-group">
                 <button
+                
                   className="btn btn-primary  mt-3"
                   id="Login"
                   onClick={(signInHandler, notify)}

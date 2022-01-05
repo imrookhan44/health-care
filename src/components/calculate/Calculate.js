@@ -1,330 +1,153 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Snackbar,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import AddBoxIcon from "@material-ui/icons/AddBox";
-import DoneIcon from "@material-ui/icons/Done";
-import ClearIcon from "@material-ui/icons/Clear";
-import { makeStyles } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import CreateIcon from "@material-ui/icons/Create";
-import "./calculate.css";
-import { GrDownload } from "react-icons/gr";
+import { FaPlus } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import Select from "react-select";
 
-const useStyles = makeStyles({
-  root: {
-    "& > *": {
-      // borderBottom: "unset",
-    },
-  },
-  table: {
-    // minWidth: 650,
-  },
-  snackbar: {
-    // bottom: "104px",
-  },
-});
+import { toast } from "react-toastify";
 
 function Calculate() {
-  const classes = useStyles();
-
-  // Defining a state named rows
-  // which we can update by calling on setRows function
-  const [rows, setRows] = useState([
+  const [row, setRows] = useState([
     {
       id: 1,
-      Action: "",
-      FromAddress: "",
-      ToAddress: "",
-      TripDateTime: "",
-      Mileage: "",
-      TimeTraveled: "",
+      fromAddress: "",
+      toAddress: "",
+      tripDateTime: "",
+      mileage: "Result Awaiting",
+      timeTraveled: "0 mins",
     },
   ]);
-
-  // Initial states
-  const [open, setOpen] = React.useState(false);
-  const [isEdit, setEdit] = React.useState(false);
-  const [disable, setDisable] = React.useState(true);
-  const [showConfirm, setShowConfirm] = React.useState(false);
-
-  // Function For closing the alert snackbar
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
-  // Function For adding new row object
   const handleAdd = () => {
     setRows([
-      ...rows,
+      ...row,
       {
-        id: rows.length + 1,
-        Action: "",
-        FromAddress: "",
-        ToAddress: "",
-        TripDateTime: "",
-        Mileage: "",
-        TimeTraveled: "",
+        id: row.length + 1,
+        fromAddress: "",
+        toAddress: "",
+        tripDateTime: "",
+        mileage: "",
+        timeTraveled: "",
       },
+      toast.success("New row added successfully", "New Row"),
     ]);
-    setEdit(true);
+    console.log("rows :",row)
   };
-
-  const handleEdit = (i) => {
-    setEdit(!isEdit);
+  const handleRemove = (i) => {
+    const list = [...row];
+    setRows(list);
+    if (row.length == 1) {
+      toast.error("Can't delete the row when there is only one row", "Warning");
+      return 
+    } else {
+      list.splice(i, 1);
+      // row.splice(row, 1);
+      toast.warning("Row deleted successfully", "Delete row");
+      return true;
+    }
   };
-
   const handleSave = () => {
-    setEdit(!isEdit);
-    setRows(rows);
-    console.log("saved : ", rows);
-    setDisable(true);
-    setOpen(true);
+    setRows(row);
+    console.log("saved : ", row);
+    toast.success("saved successfully");
   };
 
-  const handleInputChange = (e, index) => {
-    setDisable(false);
-    const { name, value } = e.target;
-    const list = [...rows];
-    list[index][name] = value;
-    setRows(list);
-  };
-  const handleConfirm = () => {
-    setShowConfirm(true);
-  };
+  const list = [
+    { label: "city", value: 1 },
+    { label: "city", value: 2 },
+    { label: "city", value: 3 },
+    { label: "city", value: 4 },
+    { label: "city", value: 5 },
+    { label: "city", value: 6 },
+  ];
 
-  const handleRemoveClick = (i) => {
-    const list = [...rows];
-    list.splice(i, 1);
-    setRows(list);
-    setShowConfirm(false);
-  };
-
-  const handleNo = () => {
-    setShowConfirm(false);
-  };
   return (
-    <div className="container table34 mt-4">
-      <TableBody>
-        <Snackbar
-          open={open}
-          autoHideDuration={2000}
-          onClose={handleClose}
-          className={classes.snackbar}
-        >
-          <Alert onClose={handleClose} severity="success">
-            Record saved successfully!
-          </Alert>
-        </Snackbar>
-        <Box>
+    <div>
+      <div class="container-fluid">
+        <div>
           <div>
+            <table className="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>From Address</th>
+                  <th>To Address </th>
+                  <th>Trip DateTime </th>
+                  <th>Mileage </th>
+                  <th>Time Traveled</th>
+                </tr>
+              </thead>
+              <tbody>
+                {row?.map((item) => (
+                  <tr>
+                    <td>
+                      <FaTrashAlt onClick={handleRemove} size={35} />
+                    </td>
+                    <td>
+                      <div className="container" style={{ height: "5px" }}>
+                        <div className="row">
+                          <div className="col-md-4"></div>
+                          <div className="">
+                            <Select options={list} />
+                          </div>
+                          <div className="col-md-4"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="container" style={{ height: "5px" }}>
+                        <div className="row">
+                          <div className="col-md-4"></div>
+                          <div className="">
+                            <Select options={list} />
+                          </div>
+                          <div className="col-md-4"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <input
+                        type="date"
+                        className="form-control  "
+                        style={{ height: "2.7rem" }}
+                      />
+                    </td>
+                    <td className="mt-4"> Result Awaiting </td>
+
+                    <td> 0 mins </td>
+                  </tr>
+                ))}
+                <tr>
+                  <td>
+                    <FaPlus onClick={handleAdd} size={35} />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <div>
-              {isEdit ? (
-                <div>
-                  <Button onClick={handleAdd}>
-                    <AddBoxIcon onClick={handleAdd} />
-                    ADD
-                  </Button>
-                  {rows.length !== 0 && (
-                    <div>
-                      {disable ? (
-                        <Button disabled align="right" onClick={handleSave}>
-                          <DoneIcon />
-                          SAVE
-                        </Button>
-                      ) : (
-                        <Button align="right" onClick={handleSave}>
-                          <DoneIcon />
-                          SAVE
-                        </Button>
-                      )}
-                    </div>
-                  )}
+              <div className="row">
+                <div className="col text-center">
+                  <button
+                    onClick={handleSave}
+                    type="button"
+                    class="btn btn-primary text-center"
+                  >
+                    Save
+                  </button>
+                  &nbsp;&nbsp;
+                  <button type="button" class="btn btn-primary text-center">
+                    Calculate Distance
+                  </button>
+                  &nbsp;&nbsp;
+                  <button type="button" class="btn btn-primary text-center">
+                    <i aria-hidden="true" className="fa fa-download"></i>{" "}
+                    Download Report
+                  </button>
                 </div>
-              ) : (
-                <div>
-                  <Button onClick={handleAdd}>
-                    <AddBoxIcon onClick={handleAdd} />
-                    ADD
-                  </Button>
-                  <Button align="right" onClick={handleEdit}>
-                    <CreateIcon />
-                    EDIT
-                  </Button>
-                </div>
-              )}
+              </div>
             </div>
           </div>
-
-          <Table className="Table">
-            <div className="container  Head  ">
-              <TableHead>
-                <TableRow>
-                  <TableCell className="one">
-                    <b>Action</b>
-                  </TableCell>
-
-                  <TableCell className="one">
-                    <b>From Address</b>
-                  </TableCell>
-
-                  <TableCell className="one">
-                    <b>To Address</b>
-                  </TableCell>
-
-                  <TableCell className="one">
-                    <b>Trip DateTime</b>
-                  </TableCell>
-
-                  <TableCell className="one">
-                    <b>Mileage</b>
-                  </TableCell>
-
-                  <TableCell className="one">
-                    <b>Time Traveled</b>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-            </div>
-            <TableBody>
-              {rows.map((row, i) => {
-                return (
-                  <div>
-                    <TableRow>
-                      {isEdit ? (
-                        <div className="Table23 offset-1">
-                          <TableCell>
-                            <input
-                              className="input"
-                              placeholder="choose from Address"
-                              value={row.FromAddress}
-                              name="FromAddress"
-                              onChange={(e) => handleInputChange(e, i)}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <input
-                              className="input"
-                              placeholder="choose To Address"
-                              value={row.ToAddress}
-                              name="ToAddress"
-                              onChange={(e) => handleInputChange(e, i)}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <input
-                              className="input"
-                              type="date"
-                              value={row.TripDateTime}
-                              name="TripDateTime"
-                              onChange={(e) => handleInputChange(e, i)}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <td>Result Awaiting</td>
-                          </TableCell>
-                          <TableCell>
-                            <td>0 mins</td>
-                          </TableCell>
-                        </div>
-                      ) : (
-                        <div>
-                          {/* <TableCell component="th"></TableCell> */}
-                          <TableCell component="th">
-                            {row.FromAddress}
-                          </TableCell>
-                          <TableCell component="th">{row.ToAddress}</TableCell>
-                          <TableCell component="th">
-                            {row.TripDateTime}
-                          </TableCell>
-                          <TableCell component="th">{row.Mileage}</TableCell>
-                          <TableCell component="th">
-                            {row.TimeTraveled}
-                          </TableCell>
-                          <TableCell component="th" scope="row"></TableCell>
-                        </div>
-                      )}
-                      {isEdit ? (
-                        <Button className="" onClick={handleConfirm}>
-                          <ClearIcon  />
-                        </Button>
-                      ) : (
-                        <Button className="" onClick={handleConfirm}>
-                          <DeleteOutlineIcon />
-                        </Button>
-                      )}
-                      {showConfirm && (
-                        <div>
-                          <Dialog
-                            open={showConfirm}
-                            onClose={handleNo}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                            <DialogTitle id="alert-dialog-title">
-                              {"Confirm Delete"}
-                            </DialogTitle>
-                            <DialogContent>
-                              <DialogContentText id="alert-dialog-description">
-                                Are you sure to delete
-                              </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                              <Button
-                                onClick={() => handleRemoveClick(i)}
-                                color="primary"
-                                autoFocus
-                              >
-                                Yes
-                              </Button>
-                              <Button
-                                onClick={handleNo}
-                                color="primary"
-                                autoFocus
-                              >
-                                No
-                              </Button>
-                            </DialogActions>
-                          </Dialog>
-                        </div>
-                      )}
-                    </TableRow>
-                  </div>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Box>
-      </TableBody>
-      <div className="row offset-3 mb-2 ">
-        <div className="col-lg-12 col-md-12  mt-3" id="buttons">
-          <Button variant="contained" id="btn1">
-            Calculate Distance
-          </Button>{" "}
-          <Button variant="contained" id="btn1">
-            <GrDownload />
-            &nbsp; Download Report
-          </Button>
         </div>
-        </div>
-        </div>
-      
+      </div>
+    </div>
   );
 }
 

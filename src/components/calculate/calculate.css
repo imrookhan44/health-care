@@ -3,9 +3,6 @@
   display: flex;
   justify-content: space-around;
 }
-.table2{
-  border: solid 2px black;
-}
 
 div.container-fluid.Head {
   width: 70rem;
@@ -14,18 +11,43 @@ div.container-fluid.Head {
 
   justify-content: center;
 }
+
 .table34 {
   border: grey solid;
 }
+
 .input {
-  width: 8rem;
+  width: 9rem;
 }
+
 .one {
   width: 20rem;
 }
+
 #btn1 {
   background-color: #0d6efd;
   color: rgb(221, 225, 228);
   font-weight: 500;
   font-size: 15px;
+}
+
+.Result {
+  margin-right: 55px;
+}
+
+@media screen and (max-width: 400px) {
+  .one {
+    margin: 0 auto !important;
+
+    padding: 0 !important;
+    max-width: 100%;
+  }
+
+  .input {
+    margin: 0 auto !important;
+    text-align: center;
+    padding: 0 !important;
+    max-width: 100%;
+    float: left;
+  }
 }
