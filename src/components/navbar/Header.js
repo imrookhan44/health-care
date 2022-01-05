@@ -1,14 +1,15 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container , NavDropdown } from "react-bootstrap";
 import "./header.css";
 import { useHistory } from "react-router-dom";
+import { auth } from "../Firebase";
 function Header() {
   let history = useHistory();
   return (
-    <div>
+    <div >
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand href="" className="heading  ">
+        <Container fluid id="Head">
+          <Navbar.Brand href="" className="heading    ">
             Health Care
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -41,8 +42,23 @@ function Header() {
               >
                 Calculate
               </Nav.Link>
+              {auth?.currentUser?.uid && (
+                <NavDropdown
+                  title={auth?.currentUser?.email}
+                  className="offset-11 "
+                >
+                  <NavDropdown.Item
+                    onClick={() => {
+                      auth?.signOut();
+                    }}
+                  >
+                    signOut
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
             </Nav>
-            <Nav>
+            
+            {/* <Nav>
               <Nav.Link
                 className="offset-7"
                 onClick={() => {
@@ -52,7 +68,8 @@ function Header() {
               >
                 Login
               </Nav.Link>
-            </Nav>
+              
+            </Nav> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>

@@ -6,6 +6,9 @@ import Login from "./components/login/Login";
 import Header from "./components/navbar/Header";
 import Routes from "./routes/Routes";
 import Home from "./components/home/Home";
+import ViewClient from "./components/client/client-setup/ViewClient";
+
+
 const authentication = {
   onAuthtication() {},
   getLogInStatus() {
@@ -39,7 +42,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      {auth?.currentUser?.email && <Header/>}
+
+  
+
+            {auth?.currentUser?.email && <Header/>}
+          
 
         {auth?.currentUser?.email ? <Routes /> : <Login />}
       </BrowserRouter>

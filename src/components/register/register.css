@@ -1,8 +1,11 @@
-.container2 {
-  width: 60rem;
-  /* border: solid black; */
-  display: flex;
-  justify-content: center;
+*{
+  box-sizing: border-box;
+}
+
+
+.container{
+  line-height: 2;
+
   margin: auto;
 }
 .heading1 {
@@ -24,4 +27,11 @@
     padding: 0px;
     margin: 0px 0px 0px 10px;
   }
+}
+#button1{
+ 
+ margin: auto;
+ display: flex;
+ justify-content: center;
+  
 }

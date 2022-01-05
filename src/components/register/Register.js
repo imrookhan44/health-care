@@ -4,8 +4,10 @@ import "./register.css";
 import { db } from "../Firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router-dom";
 
 function Register() {
+  let history = useHistory();
   const notify = () => toast.success("Form Successfully Submitted");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -19,6 +21,8 @@ function Register() {
   const [clientCellNumber, setClientCellNumber] = useState("");
   const [states, setStates] = useState("");
   const [city, setCity] = useState("");
+  const [emergencyName, setEmergencyName] = useState("");
+  const [emergencyPhone, setEmergencyPhone] = useState("");
   const [loader, setLoader] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,6 +42,8 @@ function Register() {
         clientCellNumber: clientCellNumber,
         states: states,
         city: city,
+        emergencyName: emergencyName,
+        emergencyPhone: emergencyPhone
       })
       .then(() => {
         setLoader(false);
@@ -60,18 +66,27 @@ function Register() {
     setClientCellNumber("");
     setStates("");
     setCity("");
+    setEmergencyName("");
+    setEmergencyPhone("");
   };
   return (
     <div>
       <div>
-        <div className="container2">
+        <div className="container   mt-3">
           <Form className="Form" onSubmit={handleSubmit}>
             <div className="row">
               <div className="col-8">
-                <h1 className="heading1">Client Registration Form</h1>
+                <h3 className="heading1">Client Registration Form</h3>
               </div>
               <div className="col-4 mt-2">
-                <Button variant="primary">Go To List!</Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    history.push("/Client");
+                  }}
+                >
+                  Go To List!
+                </Button>
               </div>
             </div>
 
@@ -225,7 +240,30 @@ function Register() {
                 />
               </Form.Group>
             </Row>
+            <Row>
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label className="Label">
+                  <b>Emergency Contact Name</b>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={emergencyName}
+                  onChange={(e) => setEmergencyName(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label className="Label">
+                  <b>Emergency Contact Phone</b>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={emergencyPhone}
+                  onChange={(e) => setEmergencyPhone(e.target.value)}
+                />
+              </Form.Group>
+            </Row>
             <Button
+              className="button  mt-3"
               disabled={!firstName || !lastName}
               onClick={notify}
               variant="primary"
