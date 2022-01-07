@@ -1,16 +1,17 @@
 import React from "react";
-import { Navbar, Nav, Container , NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import "./header.css";
 import { useHistory } from "react-router-dom";
 import { auth } from "../Firebase";
+import SIdeBar from "../sideBar/SIdeBar";
 function Header() {
   let history = useHistory();
   return (
-    <div >
+    <div>
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container fluid id="Head">
-          <Navbar.Brand href="" className="heading    ">
-            Health Care
+          <Navbar.Brand href="" className="heading">
+         <h5>   Health Care </h5>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -21,10 +22,11 @@ function Header() {
                   history.push("/");
                 }}
                 href=""
+                style={{color: "white"}}
               >
-                Home
+              <h6> Home </h6> 
               </Nav.Link>
-              <Nav.Link
+              {/* <Nav.Link
                 className="offset-2"
                 onClick={() => {
                   history.push("/Register");
@@ -32,8 +34,8 @@ function Header() {
                 href=""
               >
                 Registration
-              </Nav.Link>
-              <Nav.Link
+              </Nav.Link> */}
+              {/* <Nav.Link
                 className="offset-2"
                 onClick={() => {
                   history.push("/Calculate");
@@ -41,23 +43,10 @@ function Header() {
                 href=""
               >
                 Calculate
-              </Nav.Link>
-              {auth?.currentUser?.uid && (
-                <NavDropdown
-                  title={auth?.currentUser?.email}
-                  className="offset-11 "
-                >
-                  <NavDropdown.Item
-                    onClick={() => {
-                      auth?.signOut();
-                    }}
-                  >
-                    signOut
-                  </NavDropdown.Item>
-                </NavDropdown>
-              )}
+              </Nav.Link> */}
+             
             </Nav>
-            
+
             {/* <Nav>
               <Nav.Link
                 className="offset-7"
@@ -71,8 +60,31 @@ function Header() {
               
             </Nav> */}
           </Navbar.Collapse>
+          <div className="fluid34" >
+
+         
+              {auth?.currentUser?.uid && (
+                
+                <NavDropdown style={{backgroundColor:"white"}} title={auth?.currentUser?.email}
+                
+                >
+              
+                  <NavDropdown.Item
+                    onClick={() => {
+                      auth?.signOut();
+                    }}
+                  >
+                 
+                    signOut
+                    
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
+              </div>
         </Container>
       </Navbar>
+
+      <SIdeBar  />
     </div>
   );
 }

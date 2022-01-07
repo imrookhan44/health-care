@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Navbar } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+
 import BasicProfile from "./basicProfile/BasicProfile";
 import ClientStatus from "./ClientStatus/ClientStatus";
 import Services from "./services/Services";
 function ViewClient() {
-  let history = useHistory();
   const [currentTab, setCurrentTab] = useState("basic");
   return (
     <div>
@@ -14,7 +13,6 @@ function ViewClient() {
           <Navbar.Brand
             className=""
             onClick={() => {
-              // history.push("/BasicProfile");
               setCurrentTab("basic");
             }}
           >
@@ -23,7 +21,6 @@ function ViewClient() {
           <Navbar.Brand
             className="offset-1"
             onClick={() => {
-              // history.push("/Services");
               setCurrentTab("services");
             }}
           >
@@ -32,8 +29,7 @@ function ViewClient() {
           <Navbar.Brand
             className="offset-1"
             onClick={() => {
-              // history.push("/ClientStatus");
-              setCurrentTab("clientStatus")
+              setCurrentTab("clientStatus");
             }}
           >
             initial DateOfServices/Client Status

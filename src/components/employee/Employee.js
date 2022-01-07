@@ -1,5 +1,6 @@
 import React from "react";
-
+import './employee.css'
+import { FaPlus } from "react-icons/fa";
 function Employee() {
   return (
     <div>
@@ -55,9 +56,9 @@ function Employee() {
               <strong> Clients</strong>
             </div>
             <div class="col-md-4"></div>
-            <div class="col-md-4 right">
+            <div class="col-md-4 right mb-1">
               <button type="button" class="btn btn-primary" tabindex="0">
-                <i class="fas fa-plus"></i> Employee Setup{" "}
+              <FaPlus  size={25} /> Employee Setup{" "}
               </button>
             </div>
           </div>
