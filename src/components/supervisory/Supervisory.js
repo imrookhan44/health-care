@@ -1,10 +1,11 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
+import './supervisory.css'
 function Supervisory() {
   return (
     <div>
-      <div className="mt-2">
+      <div className="element">
         <div class="row">
           <div class="col-md-3">
             <b> Supervisory Information of </b>

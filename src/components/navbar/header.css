@@ -7,3 +7,12 @@
     height: 5rem;
 
 }
+#fluid{
+
+   display: flex;
+   justify-content: end;
+    
+    width: 100%;
+    color: white;
+    
+}

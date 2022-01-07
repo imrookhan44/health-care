@@ -1,19 +1,16 @@
-import { BrowserRouter,Route,Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import "./App.css";
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "./components/Firebase";
 import Login from "./components/login/Login";
 import Header from "./components/navbar/Header";
 import Routes from "./routes/Routes";
-import Home from "./components/home/Home";
-import ViewClient from "./components/client/client-setup/ViewClient";
-
 
 const authentication = {
   onAuthtication() {},
   getLogInStatus() {
     return auth?.currentUser?.uid;
-  },
+  }
 };
 export function SecureRoute(props) {
   console.log("auth user 2 ", auth?.currentUser?.email);
@@ -31,7 +28,6 @@ export function SecureRoute(props) {
   );
 }
 function App() {
-
   const [user, setUser] = useState(null);
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -42,11 +38,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-
-  
-
-            {auth?.currentUser?.email && <Header/>}
-          
+        {auth?.currentUser?.email && <Header />}
 
         {auth?.currentUser?.email ? <Routes /> : <Login />}
       </BrowserRouter>
