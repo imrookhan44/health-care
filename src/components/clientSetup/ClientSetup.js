@@ -9,10 +9,50 @@ import InitialDateOfService from "./initialDateOfService/InitialDateOfService";
 import ClientStatus from "../client/client-setup/ClientStatus/ClientStatus";
 import Summary from "./summary/Summary";
 import Done from "./Done/Done";
+import { toast } from "react-toastify";
+import firebase, { realDB } from '../Firebase'
 
 function ClientSetup() {
   const [currentTab, setCurrentTab] = useState("addClient");
   const [formData, setFormData] = useState({});
+
+
+  const submitForm = () => {
+    console.log("submiting form ", formData);
+    if (!formData?.medicaidId) {
+      toast.warning("Please enter all the fields", "Incomplete form");
+      return;
+    }
+
+    let medicalIdExists = false;
+    realDB.ref("form-data4").orderByChild("medicaidId").equalTo(formData?.medicaidId).once("value", res => {
+      if (res && res?.val()) {
+        let existingClient = Object.values(res?.val());
+        console.log("Client already exists  : ", existingClient);
+        if (existingClient[0]?.medicaidId == formData?.medicaidId) {
+          toast.warning("Medical Id Already Exist", "Client Exitsts");
+          medicalIdExists = false;
+          console.log("Res : ", res);
+          
+        }
+      } else {
+        medicalIdExists = true
+        realDB.ref("form-data4").push(formData).then(res => {
+          console.log("form updated : ", res)
+        }).catch(e => {
+          console.log("err: ", e);
+        })
+      }
+    })
+
+    if (!medicalIdExists) {
+      // realDB.ref("form-data4").push(formData).then(res => {
+      //   console.log("form updated : ", res)
+      // }).catch(e => {
+      //   console.log("err: ", e);
+      // })
+    }
+  }
 
   return (
     <div>
@@ -80,14 +120,14 @@ function ClientSetup() {
             }}
           ></Tab>
         </Tabs>
-        {currentTab == "addClient" && <AddClient formData={formData} setFormData={setFormData} currentTab={currentTab} setCurrentTab={setCurrentTab} />}
-        {currentTab == "serviceAggrement" && <ServiceAggrement formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
-        {currentTab == "servicePlan" && <ServicePlan formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
-        {currentTab == "nursingAssessment" && <NursingAssessment formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
-        {currentTab == "initialDateOfService" && <InitialDateOfService formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
-        {currentTab == "clientStatus" && <ClientStatus formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
-        {currentTab == "summary" && <Summary formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
-        {currentTab == "done" && <Done formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "addClient" && <AddClient formData={formData} setFormData={setFormData} setCurrentTab={setCurrentTab} submitForm={submitForm} />}
+        {currentTab == "serviceAggrement" && <ServiceAggrement formData={formData} setFormData={setFormData} submitForm={submitForm} setCurrentTab={setCurrentTab} />}
+        {currentTab == "servicePlan" && <ServicePlan formData={formData} setFormData={setFormData} submitForm={submitForm} setCurrentTab={setCurrentTab} />}
+        {currentTab == "nursingAssessment" && <NursingAssessment formData={formData} setFormData={setFormData} submitForm={submitForm} setCurrentTab={setCurrentTab} />}
+        {currentTab == "initialDateOfService" && <InitialDateOfService formData={formData} setFormData={setFormData} submitForm={submitForm} setCurrentTab={setCurrentTab} />}
+        {currentTab == "clientStatus" && <ClientStatus formData={formData} setFormData={setFormData} submitForm={submitForm} setCurrentTab={setCurrentTab} />}
+        {currentTab == "summary" && <Summary formData={formData} setFormData={setFormData} currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "done" && <Done formData={formData} setFormData={setFormData} currentTab={currentTab} setCurrentTab={setCurrentTab} />}
       </div>
     </div>
   );

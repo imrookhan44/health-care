@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import { toast } from "react-toastify";
 import firebase, { realDB } from '../../Firebase'
 
 function AddClient(props) {
-  let { formData, setFormData, currentTab, setCurrentTab } = props;
+  let { formData, setFormData, currentTab, setCurrentTab, submitForm } = props;
 
   useEffect(() => {
-    realDB.ref("form-data").on("value", snapshot => {
+    realDB.ref("form-data4").on("value", snapshot => {
       console.log(" form data on load :", snapshot.val());
     })
   });
@@ -16,34 +15,6 @@ function AddClient(props) {
     let value = e.target.value;
 
     setFormData({ ...formData, [name]: value });
-  }
-
-  const submitForm = () => {
-    console.log("submiting form ", formData);
-    if (!formData?.medicaidId) {
-      toast.warning("Please enter all the fields", "Incomplete form");
-      return;
-    }
-
-    let medicalIdExists = false;
-    realDB.ref("form-data3").orderByChild("medicaidId").equalTo(formData?.medicaidId).on("value", res => {
-      let existingClient = Object.values(res?.val());
-      console.log("Client already exists  : ", existingClient);
-      if (existingClient[0]?.medicaidId == formData?.medicaidId) {
-        toast.warning("Medical Id Already Exist", "Client Exitsts");
-        medicalIdExists = false;
-      } else {
-        medicalIdExists = true
-      }
-    })
-
-    if (!medicalIdExists) {
-      realDB.ref("form-data3").push(formData).then(res => {
-        console.log("form updated : ", res)
-      }).catch(e => {
-        console.log("err: ", e);
-      })
-    }
   }
 
   return (
