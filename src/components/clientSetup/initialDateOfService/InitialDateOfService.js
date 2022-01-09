@@ -1,6 +1,15 @@
 import React from 'react'
 
-function InitialDateOfService() {
+function InitialDateOfService(props) {
+  let { formData, setFormData, setCurrentTab } = props;
+
+  const updateForm = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setFormData({ ...formData, [name]: value });
+  }
+  
     return (
         <div>
               <div>
@@ -20,7 +29,7 @@ function InitialDateOfService() {
               <tbody>
                 <tr>
                   <td>
-                    <input type="date" className="form-control " />
+                    <input type="date" className="form-control" name="initial-date"  onChange={updateForm} />
                   </td>
                   <td>
                     <button
