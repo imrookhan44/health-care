@@ -28,13 +28,26 @@ function ClientSetup() {
     realDB.ref("form-data4").orderByChild("medicaidId").equalTo(formData?.medicaidId).once("value", res => {
       if (res && res?.val()) {
         let existingClient = Object.values(res?.val());
+        let keys = Object.keys(res?.val());
+        existingClient.map((item, index) => item["key"] = keys[index]);
         console.log("Client already exists  : ", existingClient);
         if (existingClient[0]?.medicaidId == formData?.medicaidId) {
           toast.warning("Medical Id Already Exist", "Client Exitsts");
           medicalIdExists = false;
-          console.log("Res : ", res);
-          
+          console.log("Res : ", res,);
+          console.log("formData : ",formData);
+          console.log(" existingClient[0].key : ",  existingClient[0].key);
+
+          realDB.ref("form-data4").child(existingClient[0]?.key).update(formData).then(res => {
+            console.log("updated successfuly");
+            toast.success("Client Data Updated Successfully", "Data updated");
+          }).catch(e => {
+            console.error("err 1", e);
+            console.error("?.message :", e?.message);
+            toast.error(e?.message)
+          })
         }
+
       } else {
         medicalIdExists = true
         realDB.ref("form-data4").push(formData).then(res => {
@@ -43,7 +56,9 @@ function ClientSetup() {
           console.log("err: ", e);
         })
       }
-    })
+    }).then(res => {
+      console.log("res level 1:", res);
+    }).catch(e => { console.error("err : ", e) })
 
     if (!medicalIdExists) {
       // realDB.ref("form-data4").push(formData).then(res => {
