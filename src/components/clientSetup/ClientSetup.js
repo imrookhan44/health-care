@@ -12,6 +12,8 @@ import Done from "./Done/Done";
 
 function ClientSetup() {
   const [currentTab, setCurrentTab] = useState("addClient");
+  const [formData, setFormData] = useState({});
+
   return (
     <div>
       <div className="container" id="twoThree">
@@ -78,14 +80,14 @@ function ClientSetup() {
             }}
           ></Tab>
         </Tabs>
-        {currentTab == "addClient" && <AddClient />}
-        {currentTab == "serviceAggrement" && <ServiceAggrement />}
-        {currentTab == "servicePlan" && <ServicePlan />}
-        {currentTab == "nursingAssessment" && <NursingAssessment />}
-        {currentTab == "initialDateOfService" && <InitialDateOfService />}
-        {currentTab == "clientStatus" && <ClientStatus />}
-        {currentTab == "summary" && <Summary />}
-        {currentTab == "done" && <Done />}
+        {currentTab == "addClient" && <AddClient formData={formData} setFormData={setFormData} currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "serviceAggrement" && <ServiceAggrement formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "servicePlan" && <ServicePlan formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "nursingAssessment" && <NursingAssessment formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "initialDateOfService" && <InitialDateOfService formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "clientStatus" && <ClientStatus formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "summary" && <Summary formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "done" && <Done formData={formData} setFormData={setFormData}  currentTab={currentTab} setCurrentTab={setCurrentTab} />}
       </div>
     </div>
   );

@@ -1,6 +1,24 @@
 import React from "react";
+import firebase, { realDB } from '../../Firebase'
 
-function AddClient() {
+function AddClient(props) {
+  let { formData, setFormData, currentTab, setCurrentTab } = props;
+
+  const updateForm = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setFormData({ ...formData, [name]: value });
+    console.log("formData: ", formData);
+  }
+  const submitForm = () => {
+    realDB.ref("form-data").push(formData).then(res => {
+      console.log("form updated : ", res)
+    }).catch(e => {
+      console.log("err: ", e);
+    })
+  }
+
   return (
     <div>
       <div>
@@ -18,6 +36,7 @@ function AddClient() {
                   type="text"
                   id="firstName"
                   className="form-control "
+                  onChange={updateForm}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -30,6 +49,7 @@ function AddClient() {
                   type="text"
                   id="lastName"
                   className="form-control "
+                  onChange={updateForm}
                 />
               </div>
             </div>
@@ -46,6 +66,7 @@ function AddClient() {
                   minlength="12"
                   maxlength="12"
                   className="form-control"
+                  onChange={updateForm}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -58,6 +79,7 @@ function AddClient() {
                   type="date"
                   id="DateOfBirth"
                   className="form-control "
+                  onChange={updateForm}
                 />
               </div>
             </div>
@@ -71,6 +93,7 @@ function AddClient() {
                   id="gender"
                   required=""
                   className="form-control "
+                  onChange={updateForm}
                 >
                   <option value="1" selected="">
                     Male
@@ -91,6 +114,7 @@ function AddClient() {
                   minlength="10"
                   id="clientcellNumber"
                   className="form-control"
+                  onChange={updateForm}
                 />
               </div>
             </div>
@@ -105,6 +129,7 @@ function AddClient() {
                   type="text"
                   id="ClientRepresentative"
                   className="form-control"
+                  onChange={updateForm}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -116,6 +141,7 @@ function AddClient() {
                   type="text"
                   id="ClientRepresentativePhone"
                   className="form-control"
+                  onChange={updateForm}
                 />
               </div>
             </div>
@@ -130,6 +156,7 @@ function AddClient() {
                   type="text"
                   id="EmeregencyContact"
                   className="form-control"
+                  onChange={updateForm}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -141,6 +168,7 @@ function AddClient() {
                   type="text"
                   id="EmeregencyContactPhone"
                   className="form-control "
+                  onChange={updateForm}
                 />
               </div>
             </div>
@@ -154,6 +182,7 @@ function AddClient() {
                   name="ProgramStatus"
                   id="ProgramStatus"
                   className="form-control"
+                  onChange={updateForm}
                 >
                   <option value="1" selected="">
                     In Progress
@@ -173,6 +202,7 @@ function AddClient() {
                   name="WavierProgram"
                   id="WavierProgram"
                   className="form-control"
+                  onChange={updateForm}
                 >
                   <option value="1" selected="">
                     Source
@@ -191,6 +221,7 @@ function AddClient() {
                   type="text"
                   id="TotallyMonthlyIncome"
                   className="form-control"
+                  onChange={updateForm}
                 />
               </div>
             </div>
@@ -205,6 +236,7 @@ function AddClient() {
                   type="textarea"
                   id="MedicalProblme"
                   className="form-control "
+                  onChange={updateForm}
                 ></textarea>
               </div>
               <div className="form-group col-md-6">
@@ -219,6 +251,7 @@ function AddClient() {
                   className="form-control "
                   ng-reflect-required=""
                   ng-reflect-name="Address"
+                  onChange={updateForm}
                 ></textarea>
               </div>
             </div>
@@ -232,6 +265,7 @@ function AddClient() {
                   required=""
                   id="States"
                   className="form-control "
+                  onChange={updateForm}
                 >
                   <option value="" ng-reflect-value="">
                     Choose State
@@ -247,6 +281,7 @@ function AddClient() {
                   id="City"
                   className="form-control "
                   ng-reflect-name="City"
+                  onChange={updateForm}
                 >
                   <option _ value="">
                     Choose City
@@ -265,6 +300,7 @@ function AddClient() {
                   minlength="5"
                   id="zipCode"
                   className="form-control"
+                  onChange={updateForm}
                 />
               </div>
             </div>
@@ -275,6 +311,7 @@ function AddClient() {
                     type="submit"
                     className="btn btn-primary text-center"
                     disabled=""
+                    onChange={submitForm}
                   >
                     Submit
                   </button>
@@ -287,8 +324,9 @@ function AddClient() {
               &nbsp;
               <button
                 className=" btn btn-primary text-center"
-                disabled=""
-                type="submit"
+                onClick={() => {
+                  setCurrentTab("serviceAggrement");
+                }}
               >
                 Next
               </button>
@@ -303,8 +341,8 @@ function AddClient() {
           </div>
         </div>
 
-     
-      
+
+
       </div>
     </div>
   );
