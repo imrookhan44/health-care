@@ -30,10 +30,12 @@ function ServiceAggrement(props) {
               <tr className="">
                 <td>
                   <input
+                    value={formData?.service_agreement_date}
                     required=""
                     type="date"
                     className="form-control "
                     ng-reflect-required=""
+                    name="service_agreement_date"
                     onChange={updateForm}
                   />
                 </td>
@@ -52,7 +54,7 @@ function ServiceAggrement(props) {
           <div className="row">
             <div className="col text-center">
               &nbsp;
-              <button className=" btn btn-primary text-center" type="button">
+              <button className=" btn btn-primary text-center" type="button" onClick={() => { setCurrentTab("addClient") }}>
                 Back
               </button>
               &nbsp;
@@ -60,6 +62,7 @@ function ServiceAggrement(props) {
                 className=" btn btn-primary text-center"
                 disabled=""
                 type="submit"
+                onClick={() => { setCurrentTab("servicePlan") }}
               >
                 Next
               </button>{" "}

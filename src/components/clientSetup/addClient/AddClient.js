@@ -8,7 +8,7 @@ function AddClient(props) {
     realDB.ref("form-data4").on("value", snapshot => {
       console.log(" form data on load :", snapshot.val());
     })
-  });
+  }, []);
 
   const updateForm = (e) => {
     let name = e.target.name;
@@ -24,11 +24,12 @@ function AddClient(props) {
           <hr />
           <div className="row">
             <div className="form-group col-md-6">
-              <label for="firstName">
+              <label>
                 <b>First Name</b>
               </label>
               <input
-                required=""
+                value={formData?.firstName}
+                required="abc"
                 name="firstName"
                 type="text"
                 id="firstName"
@@ -37,10 +38,11 @@ function AddClient(props) {
               />
             </div>
             <div className="form-group col-md-6">
-              <label for="lastName">
+              <label>
                 <b>Last Name</b>
               </label>
               <input
+                value={formData?.lastName}
                 required=""
                 name="lastName"
                 type="text"
@@ -52,25 +54,27 @@ function AddClient(props) {
           </div>
           <div className="row">
             <div className="form-group col-md-6">
-              <label for="medicaidId">
+              <label>
                 <b>Medicaid Id</b>
               </label>
               <input
+                value={formData?.medicaidId}
                 required=""
                 name="medicaidId"
                 type="text"
                 id="medicaidId"
-                minlength="12"
-                maxlength="12"
+                minLength="12"
+                maxLength="12"
                 className="form-control"
                 onChange={updateForm}
               />
             </div>
             <div className="form-group col-md-6">
-              <label _for="DateOfBirth">
+              <label >
                 <b>Date Of Birth</b>
               </label>
               <input
+                value={formData?.DateOfBirth}
                 required=""
                 name="DateOfBirth"
                 type="date"
@@ -82,10 +86,11 @@ function AddClient(props) {
           </div>
           <div className="row">
             <div className="form-group col-md-6">
-              <label for="zipCode">
+              <label >
                 <b>Gender</b>
               </label>
               <select
+                value={formData?.gender}
                 name="gender"
                 id="gender"
                 required=""
@@ -93,21 +98,22 @@ function AddClient(props) {
                 onChange={updateForm}
                 placeholder="Select Gender"
               >
-                <option value="1" selected="">Male</option>
+                <option value="1" >Male</option>
                 <option value="2">Female</option>
                 <option value="3">Not Specified</option>
               </select>
             </div>
             <div className="form-group col-md-6">
-              <label for="clientcellNumber">
+              <label >
                 <b>Client Cell Number</b>
               </label>
               <input
+                value={formData?.clientcellNumber}
                 required=""
                 name="clientcellNumber"
                 type="text"
-                maxlength="10"
-                minlength="10"
+                maxLength="10"
+                minLength="10"
                 id="clientcellNumber"
                 className="form-control"
                 onChange={updateForm}
@@ -116,10 +122,11 @@ function AddClient(props) {
           </div>
           <div className="row">
             <div className="form-group col-md-6">
-              <label for="ClientRepresentative">
+              <label>
                 <b>Client Representative Name</b>
               </label>
               <input
+                value={formData?.ClientRepresentative}
                 required="required"
                 name="ClientRepresentative"
                 type="text"
@@ -129,10 +136,11 @@ function AddClient(props) {
               />
             </div>
             <div className="form-group col-md-6">
-              <label for="ClientRepresentativePhone">
+              <label >
                 <b>Client Representative Phone</b>
               </label>
               <input
+                value={formData?.ClientRepresentativePhone}
                 name="ClientRepresentativePhone"
                 type="text"
                 id="ClientRepresentativePhone"
@@ -143,10 +151,11 @@ function AddClient(props) {
           </div>
           <div className="row">
             <div className="form-group col-md-6">
-              <label for="EmeregencyContact">
+              <label>
                 <b>Emeregency Contact Name</b>
               </label>
               <input
+                value={formData?.EmeregencyContact}
                 required="required"
                 name="EmeregencyContact"
                 type="text"
@@ -156,10 +165,11 @@ function AddClient(props) {
               />
             </div>
             <div className="form-group col-md-6">
-              <label for="EmeregencyContactPhone">
+              <label >
                 <b>Emergency Contact Phone</b>
               </label>
               <input
+                value={formData?.EmeregencyContactPhone}
                 name="EmeregencyContactPhone"
                 type="text"
                 id="EmeregencyContactPhone"
@@ -170,17 +180,18 @@ function AddClient(props) {
           </div>
           <div className="row">
             <div className="form-group col-md-6">
-              <label for="ProgramStatus">
+              <label >
                 <b>Program Status</b>
               </label>
               <select
+                value={formData?.ProgramStatus}
                 required=""
                 name="ProgramStatus"
                 id="ProgramStatus"
                 className="form-control"
                 onChange={updateForm}
               >
-                <option value="1" selected="">
+                <option value="1" >
                   In Progress
                 </option>
                 <option value="2">Approved</option>
@@ -190,17 +201,18 @@ function AddClient(props) {
           </div>
           <div className="row">
             <div className="form-group col-md-6">
-              <label for="WavierProgram">
+              <label>
                 <b>Wavier Program</b>
               </label>
               <select
+                value={formData?.WavierProgram}
                 required=""
                 name="WavierProgram"
                 id="WavierProgram"
                 className="form-control"
                 onChange={updateForm}
               >
-                <option value="1" selected="">
+                <option value="1" >
                   Source
                 </option>
                 <option value="2">CCSP</option>
@@ -208,10 +220,11 @@ function AddClient(props) {
               </select>
             </div>
             <div className="form-group col-md-6">
-              <label for="TotallyMonthlyIncome">
+              <label>
                 <b>Totally Monthly Income</b>
               </label>
               <input
+                value={formData?.TotallyMonthlyIncome}
                 required=""
                 name="TotallyMonthlyIncome"
                 type="text"
@@ -223,12 +236,13 @@ function AddClient(props) {
           </div>
           <div className="row">
             <div className="form-group col-md-6">
-              <label for="MedicalProblme">
+              <label>
                 <b>Medical Problem</b>
               </label>
               <textarea
+                value={formData?.MedicalProblem}
                 required=""
-                name="MedicalProblme"
+                name="MedicalProblem"
                 type="textarea"
                 id="MedicalProblme"
                 className="form-control "
@@ -236,10 +250,11 @@ function AddClient(props) {
               ></textarea>
             </div>
             <div className="form-group col-md-6">
-              <label for="Address">
+              <label >
                 <b>Address</b>
               </label>
               <textarea
+                value={formData?.Address}
                 required=""
                 name="Address"
                 type="textarea"
@@ -253,10 +268,11 @@ function AddClient(props) {
           </div>
           <div className="row">
             <div lass="form-group col-md-4">
-              <label for="States">
+              <label >
                 <b>States</b>
               </label>
               <select
+                value={formData?.States}
                 name="States"
                 required=""
                 id="States"
@@ -281,37 +297,39 @@ function AddClient(props) {
               </select>
             </div>
             <div className="form-group col-md-4">
-              <label for="City">
+              <label >
                 <b>City</b>
               </label>
               <select
+                value={formData?.City}
                 name="City"
                 id="City"
                 className="form-control "
                 ng-reflect-name="City"
                 onChange={updateForm}
               >
-                <option _ value="1">
+                <option _ value="">
                   Choose City
                 </option>
-                <option _ value="2">
+                <option _ value="Testing 1">
                   Testing 1
                 </option>
-                <option _ value="3">
+                <option _ value="Testing 2">
                   Testing 2
                 </option>
               </select>
             </div>
             <div className="form-group col-md-4">
-              <label for="zipCode">
+              <label >
                 <b>Zip Code</b>
               </label>
               <input
+                value={formData?.zipCode}
                 required=""
                 name="zipCode"
                 type="text"
-                maxlength="5"
-                minlength="5"
+                maxLength="5"
+                minLength="5"
                 id="zipCode"
                 className="form-control"
                 onChange={updateForm}

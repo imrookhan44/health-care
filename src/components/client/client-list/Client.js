@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlus, FaDownload } from "react-icons/fa";
+import { realDB } from "../../Firebase";
+
 function Client() {
+  useEffect(() => {
+    realDB.ref("form-data4").on("value", snapshot => {
+      if (snapshot && snapshot.val()) {
+        console.log(" snapshot val ()", snapshot.val());
+        setClients(Object.values(snapshot.val()));
+      }
+    })
+  }, []);
+
+  const [clients, setClients] = useState([]);
+
   return (
     <div>
       <div class="row">
@@ -61,7 +74,7 @@ function Client() {
             <b>Search By Client Name</b>
           </label>
           <input
-            
+
             type="text"
             name="title"
             id="title"
@@ -87,12 +100,12 @@ function Client() {
             <div class="col-md-4"></div>
             <div class="col-md-4 right">
               <button type="button" class="btn btn-primary">
-              <FaPlus />
+                <FaPlus />
                 ClientSetup{" "}
               </button>{" "}
               &nbsp;
               <button type="button" class="btn btn-primary">
-              <FaDownload />  Download
+                <FaDownload />  Download
               </button>
             </div>
           </div>
@@ -106,12 +119,24 @@ function Client() {
                   <th scope="col">Cell Phone.</th>
                   <th scope="col">Emergency Contact Name</th>
                   <th scope="col">Emergy Contact No.</th>
-
                   <th scope="col">Address</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                {clients?.map((item, index) => {
+                  return <tr>
+                    <td>{index}</td>
+                    <td>{item?.firstName}</td>
+                    <td>{item?.DateOfBirth}</td>
+                    <td>{item?.clientcellNumber}</td>
+                    <td>{item?.EmeregencyContact}</td>
+                    <td>{item?.EmeregencyContactPhone}</td>
+                    <td>{item?.Address}</td>
+                    <td><div style={{ backgroundColor: "white", border: "solid 1px black", padding: '3px' }}>Remove</div></td>
+                  </tr>
+                })}
+              </tbody>
             </table>
             <div class="card-footer pb-0 pt-3"></div>
           </div>

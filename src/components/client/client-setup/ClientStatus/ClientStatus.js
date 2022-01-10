@@ -12,16 +12,41 @@ function ClientStatus(props) {
 
   return (
     <div>
-      <div class="mat-tab-body-content " style={{ transform: "none;" }}>
-        <div class="row mt-4 ">
-          <div class="col-md-2">
+      <div className="mat-tab-body-content " style={{ transform: "none" }}>
+        <div className="row mt-4 ">
+          <div className="col-md-2">
             <strong>Initial Date Of Service </strong>
           </div>
-          <div class="col-md-2"></div>
-          <div class="col-md-2">
+          <div className="col-md-2">
+          <u>{formData?.initial_date}</u>
+          </div>
+          <div className="col-md-2">
             <strong>Client Status </strong>
           </div>
-          <div class="col-md-2"></div>
+          <div className="col-md-2">  <u>{formData?.initial_date}</u></div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col text-center">
+          <button className=" btn btn-primary text-center" type="button" onClick={() => { setCurrentTab("initialDateOfService") }}>
+            Back
+          </button>
+          &nbsp;
+          <button
+            className=" btn btn-primary text-center"
+            disabled=""
+            type="submit"
+            onClick={() => { setCurrentTab("summary") }}
+          >
+            Next
+          </button>{" "}
+          &nbsp;
+          <button
+            title="Client list"
+            className="btn btn-primary text-center"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>

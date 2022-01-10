@@ -2,7 +2,7 @@ import React from 'react'
 
 function NursingAssessment(props) {
 
-  let { formData, setFormData, setCurrentTab } = props;
+  let { formData, setFormData, setCurrentTab, submitForm } = props;
 
   const updateForm = (e) => {
     let name = e.target.name;
@@ -30,12 +30,15 @@ function NursingAssessment(props) {
             <tbody>
               <tr className="">
                 <td>
-                  <input type="date" className="form-control " name="nursing-assesment" onChange={updateForm} />
+                  <input type="date" className="form-control "
+                    value={formData?.nursing_assesment}
+                    name="nursing_assesment" onChange={updateForm} />
                 </td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-primary text-center"
+                    onClick={submitForm}
                   >
                     Save
                   </button>
@@ -46,7 +49,7 @@ function NursingAssessment(props) {
           </table>
           <div className="row">
             <div className="col text-center">
-              <button className=" btn btn-primary text-center" type="button">
+              <button className=" btn btn-primary text-center" type="button" onClick={() => { setCurrentTab("servicePlan") }}>
                 Back
               </button>{" "}
               &nbsp;
@@ -54,6 +57,7 @@ function NursingAssessment(props) {
                 className=" btn btn-primary text-center"
                 disabled=""
                 type="submit"
+                onClick={() => { setCurrentTab("initialDateOfService") }}
               >
                 Next
               </button>

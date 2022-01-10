@@ -1,7 +1,7 @@
 import React from 'react'
 
 function ServicePlan(props) {
-  let { formData, setFormData, setCurrentTab } = props;
+  let { formData, setFormData, setCurrentTab, submitForm } = props;
 
   const updateForm = (e) => {
     let name = e.target.name;
@@ -28,12 +28,18 @@ function ServicePlan(props) {
             <tbody>
               <tr className="">
                 <td>
-                  <input type="date" className="form-control" name='service-agreement-date' onChange={updateForm} />
+                  <input
+                    value={formData?.service_plan_date}
+                    type="date"
+                    className="form-control"
+                    name='service_plan_date'
+                    onChange={updateForm} />
                 </td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-primary text-center"
+                    onClick={submitForm}
                   >
                     Save
                   </button>
@@ -43,7 +49,7 @@ function ServicePlan(props) {
           </table>
           <div className="row">
             <div className="col text-center">
-              <button className=" btn btn-primary text-center" type="button">
+              <button className=" btn btn-primary text-center" type="button" onClick={() => { setCurrentTab("serviceAggrement") }}>
                 Back
               </button>
               &nbsp;
@@ -51,6 +57,7 @@ function ServicePlan(props) {
                 className=" btn btn-primary text-center"
                 disabled=""
                 type="submit"
+                onClick={() => { setCurrentTab("nursingAssessment") }}
               >
                 Next
               </button>{" "}

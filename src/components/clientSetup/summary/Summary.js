@@ -73,25 +73,25 @@ function Summary(props) {
             <strong>Address </strong>
           </div>
           <div className="col-md-2">
-            <u>{formData?.firstName}</u>
+            <u>{formData?.Address}</u>
           </div>
           <div className="col-md-2">
             <strong>States</strong>
           </div>
           <div className="col-md-2">
-            <u>{formData?.firstName}</u>
+            <u>{formData?.States}</u>
           </div>
           <div className="col-md-2">
             <strong>City </strong>
           </div>
           <div className="col-md-2">
-            <u>{formData?.firstName} </u>
+            <u>{formData?.City} </u>
           </div>
           <div className="col-md-2">
             <strong>Zip Code</strong>
           </div>
           <div className="col-md-2">
-            <u>{formData?.firstName} </u>
+            <u>{formData?.zipCode} </u>
           </div>
         </div>
         <hr className="" />
@@ -110,7 +110,7 @@ function Summary(props) {
             <strong>Totally Monthly Income</strong>
           </div>
           <div className="col-md-2">
-            <u> $</u>
+            <u> ${formData?.TotallyMonthlyIncome}</u>
           </div>
         </div>
         <div className="row mt-4 ">
@@ -118,7 +118,7 @@ function Summary(props) {
             <strong>Medical Problem</strong>
           </div>
           <div className="col-md-4">
-            <u> </u>
+            <u> {formData?.MedicalProblem} </u>
           </div>
         </div>
         <hr className="" />
@@ -127,19 +127,19 @@ function Summary(props) {
             <strong>Service Agreement</strong>
           </div>
           <div className="col-md-2">
-            <u></u>
+            <u> {formData?.service_agreement_date} </u>
           </div>
           <div className="col-md-2">
             <strong>Service Plan </strong>
           </div>
           <div className="col-md-2">
-            <u></u>
+            <u> {formData?.service_plan_date} </u>
           </div>
           <div className="col-md-2">
             <strong>Nursing Assessment</strong>
           </div>
           <div className="col-md-2">
-            <u> </u>
+            <u> {formData?.nursing_assesment} </u>
           </div>
         </div>
         <div className="row mt-4 ">
@@ -147,22 +147,22 @@ function Summary(props) {
             <strong>Initial Date Of Service </strong>
           </div>
           <div className="col-md-2">
-            <u></u>
+            <u> {formData?.initial_date} </u>
           </div>
           <div className="col-md-2">
             <strong>Client Status </strong>
           </div>
           <div className="col-md-2">
-            <u></u>
+            <u> {formData?.initial_date} </u>
           </div>
         </div>
         <div className="row mt-5 ">
           <div className="col text-center">
-            <button className=" btn btn-primary text-center" type="button">
+            <button className=" btn btn-primary text-center" type="button" onClick={() => { setCurrentTab("clientStatus") }}>
               Back
             </button>{" "}
             &nbsp;
-            <button className=" btn btn-primary text-center" type="submit">
+            <button className=" btn btn-primary text-center" type="submit" onClick={() => { setCurrentTab("done") }}>
               Next
             </button>{" "}
             &nbsp;
