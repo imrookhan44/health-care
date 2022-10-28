@@ -2,14 +2,11 @@ import React from "react";
 
 function ClientStatus(props) {
   let { formData, setFormData, setCurrentTab } = props;
-
   const updateForm = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-
     setFormData({ ...formData, [name]: value });
   }
-
   return (
     <div>
       <div className="mat-tab-body-content " style={{ transform: "none" }}>

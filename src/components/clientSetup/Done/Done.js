@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Done(props) {
   let { formData, setFormData, setCurrentTab } = props;
@@ -7,12 +7,18 @@ function Done(props) {
     <div>
       <div>
         <p className="">You are now done.</p> &nbsp;
-        <button title="Client list" className="btn btn-primary text-center" onClick={() => { setCurrentTab("addClient") }}>
+        <button
+          title="Client list"
+          className="btn btn-primary text-center"
+          onClick={() => {
+            setCurrentTab("addClient");
+          }}
+        >
           Close
         </button>
       </div>
     </div>
-  )
+  );
 }
 
-export default Done
+export default Done;

@@ -5,7 +5,9 @@ function Done() {
     <div >
       <div className="container1">
         <p>You are now done.</p> &nbsp;{" "}
-        <button title="Client list" className="btn btn-primary text-center">
+        <button title="Client list" className="btn btn-primary text-center"
+               onClick={() => {setCurrentTab("addClient")}}
+        >
           Close
         </button>
       </div>

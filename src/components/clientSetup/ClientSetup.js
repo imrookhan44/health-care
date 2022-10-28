@@ -11,6 +11,7 @@ import Summary from "./summary/Summary";
 import Done from "./Done/Done";
 import { toast } from "react-toastify";
 import firebase, { realDB } from '../Firebase'
+import ViewClient from "../client/client-setup/ViewClient";
 
 function ClientSetup() {
   const [currentTab, setCurrentTab] = useState("addClient");
@@ -140,6 +141,7 @@ function ClientSetup() {
         {currentTab == "clientStatus" && <ClientStatus formData={formData} setFormData={setFormData} submitForm={submitForm} setCurrentTab={setCurrentTab} />}
         {currentTab == "summary" && <Summary formData={formData} setFormData={setFormData} currentTab={currentTab} setCurrentTab={setCurrentTab} />}
         {currentTab == "done" && <Done formData={formData} setFormData={setFormData} currentTab={currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == "done" && <ViewClient formData={formData} setFormData={setFormData} currentTab={currentTab} setCurrentTab={setCurrentTab} />}
       </div>
     </div>
   );

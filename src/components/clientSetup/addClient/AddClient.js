@@ -29,6 +29,7 @@ function AddClient(props) {
               </label>
               <input
                 value={formData?.firstName}
+                onChange={updateForm}
                 required="abc"
                 name="firstName"
                 type="text"
@@ -98,9 +99,9 @@ function AddClient(props) {
                 onChange={updateForm}
                 placeholder="Select Gender"
               >
-                <option value="1" >Male</option>
-                <option value="2">Female</option>
-                <option value="3">Not Specified</option>
+                <option value="male" >Male</option>
+                <option value="female">Female</option>
+                <option value="not Specified">Not Specified</option>
               </select>
             </div>
             <div className="form-group col-md-6">
@@ -191,11 +192,11 @@ function AddClient(props) {
                 className="form-control"
                 onChange={updateForm}
               >
-                <option value="1" >
+                <option value="In Progress" >
                   In Progress
                 </option>
-                <option value="2">Approved</option>
-                <option value="3">Dis Approved</option>
+                <option value="Approved">Approved</option>
+                <option value="Dis Approved">Dis Approved</option>
               </select>
             </div>
           </div>
@@ -212,11 +213,11 @@ function AddClient(props) {
                 className="form-control"
                 onChange={updateForm}
               >
-                <option value="1" >
+                <option value="Source" >
                   Source
                 </option>
-                <option value="2">CCSP</option>
-                <option value="3">GAPP</option>
+                <option value="CCSP">CCSP</option>
+                <option value="GAPP">GAPP</option>
               </select>
             </div>
             <div className="form-group col-md-6">
@@ -279,19 +280,19 @@ function AddClient(props) {
                 className="form-control "
                 onChange={updateForm}
               >
-                <option value="" ng-reflect-value="">
+                <option value="" >
                   Choose State
                 </option>
-                <option value="" ng-reflect-value="">
+                <option value="NewYork" >
                   Newyork
                 </option>
-                <option value="" ng-reflect-value="">
+                <option value="Atlanta" >
                   Atlanta
                 </option>
-                <option value="" ng-reflect-value="">
+                <option value="Canada" >
                   Canada
                 </option>
-                <option value="" ng-reflect-value="">
+                <option value="Testing" >
                   Testing
                 </option>
               </select>

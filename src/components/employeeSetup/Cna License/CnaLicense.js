@@ -2,7 +2,15 @@ import React from 'react'
 import { FaPlus } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import './cnaLicense.css'
-function CnaLicense() {
+function CnaLicense(props) {
+  let { formData, setFormData, setCurrentTab, submitForm } = props;
+
+  const updateForm = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setFormData({ ...formData, [name]: value });
+  }
     return (
         <div>
                <div className='fluid2'>
@@ -110,6 +118,7 @@ function CnaLicense() {
                 className="
                  btn btn-primary text-center"
                 type="button"
+                onClick={() => { setCurrentTab("skinTest") }}
               >
                 Back
               </button>{" "}
@@ -118,6 +127,7 @@ function CnaLicense() {
                 className="
                  btn btn-primary text-center"
                 type="submit"
+                onClick={() => { setCurrentTab("done") }}
               >
                 Next
               </button>{" "}
