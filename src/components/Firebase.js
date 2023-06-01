@@ -4,12 +4,13 @@ import "firebase/firestore";
 import "firebase/database";
 
 const firebaseConfig = {
- apiKey: "AIzaSyCq_X_B3m5Ld0xq9NxILylJAG1mQJdu8O8",
-  authDomain: "salloon-4e686.firebaseapp.com",
-  projectId: "salloon-4e686",
-  storageBucket: "salloon-4e686.appspot.com",
-  messagingSenderId: "123630027967",
-  appId: "1:123630027967:web:c6e00dcf36590a7c51f20a"
+ apiKey: "AIzaSyCsO4BWkn_GUxJhSbhf93PBmX2KvEKcOpg",
+  authDomain: "healthcare-7909e.firebaseapp.com",
+  projectId: "healthcare-7909e",
+  storageBucket: "healthcare-7909e.appspot.com",
+  messagingSenderId: "1010376615973",
+  appId: "1:1010376615973:web:95100d891929f1d66237cc",
+  measurementId: "G-M1JV5B97QV"
 };
 
 let InitFirebase;
